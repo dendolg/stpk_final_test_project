@@ -37,3 +37,9 @@ class ProductPage(BasePage):
         assert (
             product_price == product_price_msg
         ), "Wrong product price (basket price) in message"
+    
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.PRODUCT_NAME_IN_MESSAGE), "success message is not found"
+
+    def should_disappear_success_message(self):
+        assert self.is_disappeared(*ProductPageLocators.PRODUCT_NAME_IN_MESSAGE), "success message has not disappeared"    
