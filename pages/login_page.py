@@ -1,5 +1,6 @@
 from .base_page import BasePage
 from .locators import LoginPageLocators
+import time
 
 
 class LoginPage(BasePage):
@@ -26,3 +27,15 @@ class LoginPage(BasePage):
             * self.is_element_present(*LoginPageLocators.REG_PASSWORD_CONFIRM)
             * self.is_element_present(*LoginPageLocators.REG_SUBMIT_BUTTON)
         ), "One or few register form elements wasn't found"
+
+    def register_new_user(self):
+        email = str(time.time()) + "@fakemail.org"
+        password = str(time.time()) + "PasSwoRd"
+        reg_email = self.browser.find_element(*LoginPageLocators.REG_EMAIL)
+        reg_password = self.browser.find_element(*LoginPageLocators.REG_PASSWORD)
+        reg_password_confirm = self.browser.find_element(*LoginPageLocators.REG_PASSWORD_CONFIRM)
+        reg_submit = self.browser.find_element(*LoginPageLocators.REG_SUBMIT_BUTTON)
+        reg_email.send_keys(email)
+        reg_password.send_keys(password)
+        reg_password_confirm.send_keys(password)
+        reg_submit.click()
